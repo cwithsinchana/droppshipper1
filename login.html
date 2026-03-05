@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupplyChain AI - Sign In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #dbe9ff 0%, #e8f1ff 50%, #f0f5ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .header { text-align: center; margin-bottom: 40px; animation: fadeIn 0.3s ease; }
+        .header h1 { font-size: 48px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+        .header p { font-size: 18px; color: #6b7280; }
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 540px;
+            padding: 48px 56px;
+            animation: fadeIn 0.4s ease;
+        }
+        .card-title { font-size: 28px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+        .card-subtitle { font-size: 14px; color: #6b7280; margin-bottom: 32px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 8px; }
+        .form-group input {
+            width: 100%; height: 48px; padding: 12px 16px;
+            font-size: 15px; font-family: 'Inter', sans-serif;
+            color: #1a1a1a; background: #fff;
+            border: 1px solid #d1d5db; border-radius: 8px;
+            transition: all 0.2s; outline: none;
+        }
+        .form-group input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+        .form-group input::placeholder { color: #9ca3af; }
+        .error-box {
+            color: #dc2626; font-size: 13px; font-weight: 500;
+            padding: 10px 14px; background: #fef2f2;
+            border: 1px solid #fecaca; border-radius: 8px;
+            margin-bottom: 16px; display: none;
+        }
+        .submit-btn {
+            width: 100%; height: 48px; background: #3b82f6;
+            color: #fff; font-size: 16px; font-weight: 600;
+            border: none; border-radius: 8px; cursor: pointer;
+            transition: all 0.2s; font-family: 'Inter', sans-serif; margin-top: 8px;
+        }
+        .submit-btn:hover:not(:disabled) { background: #2563eb; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+        .submit-btn:disabled { background: #93c5fd; cursor: not-allowed; }
+        .divider { height: 1px; background: #e5e7eb; margin: 28px 0; }
+        .demo-title { font-size: 13px; color: #6b7280; margin-bottom: 12px; font-weight: 500; }
+        .demo-account {
+            background: #f9fafb; padding: 12px 16px;
+            border-radius: 8px; margin-bottom: 8px;
+            font-size: 13px; color: #4b5563;
+            cursor: pointer; transition: all 0.2s;
+            border: 2px solid transparent;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .demo-account:hover { background: #eff6ff; border-color: #bfdbfe; }
+        .demo-account strong { font-weight: 700; color: #1a1a1a; }
+        .demo-badge {
+            font-size: 11px; font-weight: 600; padding: 2px 8px;
+            border-radius: 99px; margin-left: auto;
+        }
+        .badge-admin { background: #dbeafe; color: #1d4ed8; }
+        .badge-seller { background: #d1fae5; color: #065f46; }
+        .badge-manufacturer { background: #fef3c7; color: #92400e; }
+        .footer-link { text-align: center; margin-top: 24px; font-size: 14px; color: #6b7280; }
+        .footer-link a { color: #3b82f6; font-weight: 600; text-decoration: none; }
+        .footer-link a:hover { color: #2563eb; text-decoration: underline; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 600px) {
+            .header h1 { font-size: 36px; }
+            .card { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>SupplyChain AI</h1>
+        <p>AI-Powered Supplier Risk Management</p>
+    </div>
+
+    <div class="card">
+        <h2 class="card-title">Sign In</h2>
+        <p class="card-subtitle">Welcome back! Enter your credentials to continue.</p>
+
+        <div id="errorBox" class="error-box"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">Sign In</button>
+        </form>
+
+        <div class="divider"></div>
+
+        <p class="demo-title">Quick access — click to auto-fill:</p>
+
+        <div class="demo-account" data-email="admin@platform.com" data-password="admin123">
+            <span>🛡️</span>
+            <div><strong>Admin</strong> — admin@platform.com</div>
+            <span class="demo-badge badge-admin">Admin</span>
+        </div>
+        <div class="demo-account" data-email="seller@test.com" data-password="seller123">
+            <span>🏪</span>
+            <div><strong>Seller</strong> — seller@test.com</div>
+            <span class="demo-badge badge-seller">Seller</span>
+        </div>
+        <div class="demo-account" data-email="manufacturer@test.com" data-password="manu123">
+            <span>🏭</span>
+            <div><strong>Manufacturer</strong> — manufacturer@test.com</div>
+            <span class="demo-badge badge-manufacturer">Manufacturer</span>
+        </div>
+
+        <p class="footer-link">New user? <a href="google.html">Create an Account</a></p>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById("email");
+        const passInput  = document.getElementById("password");
+        const submitBtn  = document.getElementById("submitBtn");
+        const errorBox   = document.getElementById("errorBox");
+
+        // Demo account auto-fill
+        document.querySelectorAll(".demo-account").forEach(acc => {
+            acc.addEventListener("click", function () {
+                emailInput.value = this.dataset.email;
+                passInput.value  = this.dataset.password;
+                errorBox.style.display = "none";
+                this.style.background = "#dbeafe";
+                setTimeout(() => this.style.background = "", 400);
+                submitBtn.focus();
+            });
+        });
+
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            errorBox.style.display = "none";
+
+            const email    = emailInput.value.trim();
+            const password = passInput.value;
+
+            if (!email || !password) {
+                errorBox.textContent = "Please enter both email and password.";
+                errorBox.style.display = "block";
+                return;
+            }
+
+            submitBtn.disabled    = true;
+            submitBtn.textContent = "Signing in...";
+
+            try {
+                const response = await fetch("http://127.0.0.1:5000/login", {
+                    method:  "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body:    JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.status === "success") {
+                    // ── Save auth info for dashboard pages ──
+                    localStorage.setItem("sc_token",     data.token);
+                    localStorage.setItem("sc_role",      data.role);
+                    localStorage.setItem("sc_user",      JSON.stringify(data.user));
+                    localStorage.setItem("sc_full_name", data.user.full_name);
+                    localStorage.setItem("sc_email",     data.user.email);
+
+                    submitBtn.textContent = "✓ Redirecting...";
+
+                    // Redirect based on role
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                    }, 500);
+
+                } else {
+                    errorBox.textContent   = data.message || "Login failed. Please try again.";
+                    errorBox.style.display = "block";
+                    submitBtn.disabled     = false;
+                    submitBtn.textContent  = "Sign In";
+                }
+
+            } catch (err) {
+                errorBox.textContent   = "❌ Cannot connect to server. Make sure backend is running:\npython -m uvicorn main:app --reload --port 5000";
+                errorBox.style.display = "block";
+                submitBtn.disabled     = false;
+                submitBtn.textContent  = "Sign In";
+            }
+        });
+    </script>
+</body>
+</html>
